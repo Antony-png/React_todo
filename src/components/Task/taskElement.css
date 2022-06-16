@@ -7,3 +7,11 @@
   border-radius: 5px;
   padding: 10px;
 }
+
+.task p {
+  width: 80%;
+}
+
+.task input {
+  margin-top: 20px;
+}

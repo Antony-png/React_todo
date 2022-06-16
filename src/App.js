@@ -1,14 +1,23 @@
-import { useState } from 'react';
-import TodoList from './components/Todo/taskList';
+import React, { useState } from 'react';
 import Sidebar from './components/Sidebar/sidebar';
 import Header from './components/Header/header';
-import TaskForm from './components/TaskForm/taskForm';
+import Form from './components/Form/form';
+import TaskList from './components/Task/taskList'
 // import data from './state';
 import './App.css';
 
-function App() {
 
-  const [state, setState] = useState([
+function App() {
+  console.log('render');
+  const [listId, setListId] = useState('')
+  const [tasks, setTasks] = useState([
+    {
+      name: 'Create task list 1',
+      due_date: '2022-09-22',
+      task_id: 6,
+      list_id: 1,
+      description: ''
+    },
     {
       name: 'Create task list 2',
       due_date: '2022-12-22',
@@ -23,20 +32,33 @@ function App() {
       list_id: 2,
       description: 'Test'
     }
-  ]);
+  ])
+  
+  const createTodo = (todoValue) => {
+    setTasks(todoValue)
+  }
+  
+  const setTasksByListId = (value) => {
+    setListId(value)
+  }
+  
+  const deleteTask = (todo) => {
+    const tasksLists = tasks.filter((element) => element.task_id !== todo.task_id)
+    setTasks(tasksLists)
+  }
 
-  const [task, setTask] = useState([])
-
+  const taskList = [...tasks].filter((element) => element.list_id === listId)
+  console.log(tasks);
   return (
     <div className="App">
       <Header />
      <div className='App-main'>
       <div className='App-sidebar'>
-          <Sidebar state={state}/>   
+          <Sidebar setTasksByListId={setTasksByListId}/>   
         </div>
         <div className='App-container'>
-          <TodoList state={state}/>
-          <TaskForm state={task} setState={setTask}/>
+          <TaskList tasks={taskList} deleteTodo={deleteTask}/>
+          <Form listId={listId} todo={tasks} createTodo={createTodo}/> 
         </div>
      </div>
     </div>

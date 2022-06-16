@@ -1,6 +1,17 @@
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .sidebar-links a{
   color: black;
   text-decoration: none;
   background-color: white;
-  border: solid;
+  border-radius: 3px;
+}
+
+.sidebar-links h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
