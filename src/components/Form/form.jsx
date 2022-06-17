@@ -3,11 +3,10 @@ import './form.css'
 
 const Form = (props) => {
   const todos = props.todo
-  
+  const listId = props.listId
   let maxId = todos.map((element) => element.task_id)
   let initialTaskId = Math.max(...maxId)
 
-  const listId = props.listId
   const nameField = useTextField('', 'name')
   const due_dateField = useTextField('', 'due_date')
   const descriptionField = useTextField('', 'description')
@@ -16,16 +15,15 @@ const Form = (props) => {
     nameField,
     due_dateField,
     descriptionField,
-  )
+    )
 
+    console.log('TaskForm....................');
+    console.log(taskForm.value);
+    console.log('........................');
+    
   const onSubmitHandle = (event) => {
     event.preventDefault()
-    props.createTodo(
-      [
-        ...todos,
-        taskForm.value,
-      ]
-    )
+    props.createTodo(taskForm.value)
     taskForm.reset()
   }
 
@@ -49,9 +47,13 @@ const Form = (props) => {
         const newObj = Object.fromEntries(fields.map(f => [f.name, f.value]))
         newObj.list_id = parseInt(listId)
         newObj.task_id = initialTaskId + 1
+        newObj.done = false
         if(newObj.task_id < 0) {
           newObj.task_id = 1
         }
+          console.log('newObj....................');
+          console.log(newObj);
+          console.log('........................');
         return newObj
       },
       reset() {

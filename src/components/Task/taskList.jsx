@@ -7,7 +7,11 @@ const ListTasks = (props) => {
     <div>
       <h2>Todolist</h2>
       {
-        tasks.map((t, i) => <Task key={t.task_id} taskId={t.task_id} todo={t} deleteTodo={props.deleteTodo}/>)
+        tasks.map((t, i) => <Task key={t.task_id}
+          taskId={t.task_id} todo={t} 
+          deleteTodo={props.deleteTodo}
+          setDoneTask={props.setDoneTask}
+        />)
       }
     </div>
   );
